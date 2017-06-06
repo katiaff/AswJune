@@ -11,7 +11,7 @@ public class Database {
 			Connection db = DriverManager.getConnection("jdbc:postgresql:citizens", "postgres", "postgres");
 			return db;
 		} catch (SQLException e) {
-			System.err.println("Error al conectar con la bbdd: ");
+			System.err.println("Connection to the database refused: ");
 			System.err.println(e);
 			return null;
 		}

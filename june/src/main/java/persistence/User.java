@@ -16,17 +16,39 @@ public class User {
 	
 	private String email;
 	private String password;
+	
+	private int pollingStation;
+	
+	public User()
+	{
+		
+	}
 
-	public User(String firstName, String lastName, Date dateOfBirth, String address, String nationality,
-			String dni, String email) {
+	public User(String dni, String firstName, String lastName, String password, String email,
+			Date dateOfBirth, String address, String nationality, int pollingStation) {
 		super();
+		this.dni = dni;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.nationality = nationality;
+		this.pollingStation = pollingStation;
+	}
+
+	public User(String dni, String firstName, String lastName, Date dateOfBirth, String address, String nationality,
+			String email, int pollingStation) {
+		super();
+		this.dni = dni;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.nationality = nationality;
-		this.dni = dni;
 		this.email = email;
+		this.pollingStation = pollingStation;
 	}
 
 	public Integer getId() {
@@ -101,6 +123,14 @@ public class User {
 		this.password = password;
 	}
 
+	public int getPollingStation() {
+		return pollingStation;
+	}
+
+	public void setPollingStation(int pollingStation) {
+		this.pollingStation = pollingStation;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,6 +143,7 @@ public class User {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + pollingStation;
 		return result;
 	}
 
@@ -165,6 +196,8 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (pollingStation != other.pollingStation)
+			return false;
 		return true;
 	}
 
@@ -172,6 +205,6 @@ public class User {
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", address="
 				+ address + ", nationality=" + nationality + ", dni=" + dni + ", email=" + email + ", password="
-				+ password + "]";
+				+ password + ", pollingStation=" + pollingStation + "]";
 	}
 }

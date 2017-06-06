@@ -1,4 +1,4 @@
-package asw.uniovi.june.citizensLoader.letters;
+package citizensLoader.letters;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -14,7 +14,7 @@ public class TxtLetter implements LetterGenerator{
 		String fileName = "PersonalLetters/"+user.getEmail()+".txt";
 		file = new BufferedWriter(new FileWriter(fileName));
 
-		String message ="User: " + user.getEmail()+ "\nPassword: "+user.getPassword();
+		String message ="User:"+user.getEmail()+"\tPassword:"+user.getPassword();
 		file.write(message);
 		file.close();
 	}

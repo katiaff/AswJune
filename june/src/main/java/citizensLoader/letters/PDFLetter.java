@@ -1,4 +1,4 @@
-package asw.uniovi.june.citizensLoader.letters;
+package citizensLoader.letters;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class PDFLetter implements LetterGenerator{
         PdfDocument pdf = new PdfDocument(writer);
  
         Document document = new Document(pdf);
-        document.add(new Paragraph("User: " + user.getEmail()+ "\nPassword: "+user.getPassword()));
+        document.add(new Paragraph("User:" + user.getEmail()+ "\tPassword:"+user.getPassword()));
         document.close();
 	}
 }

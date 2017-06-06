@@ -1,9 +1,9 @@
-package asw.uniovi.june.citizensLoader;
+package citizensLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import asw.uniovi.june.citizensLoader.factory.ExcelReader;
+import citizensLoader.factory.ExcelReader;
 import persistence.User;
 import persistence.UserDao;
 import persistence.impl.UserDaoImpl;
@@ -28,7 +28,7 @@ public class LoadUsers {
 			try {
 				users = reader.readFrom(file);
 				for(User us : users)  {
-					userdao.save(us);
+					userdao.saveUser(us);
 					System.out.println("Saved " + us.toString());
 				}
 				System.out.println("Loaded " + users.size() + " users from " + file + "\n");

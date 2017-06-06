@@ -1,4 +1,4 @@
-package asw.uniovi.june.citizensLoader.letters;
+package citizensLoader.letters;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package asw.uniovi.june.citizensLoader.factory;
+package citizensLoader.factory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,16 +11,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import asw.uniovi.june.citizensLoader.letters.LetterGenerator;
-import asw.uniovi.june.citizensLoader.letters.PDFLetter;
-import asw.uniovi.june.citizensLoader.letters.PasswordGenerator;
-import asw.uniovi.june.citizensLoader.letters.TxtLetter;
+import citizensLoader.letters.LetterGenerator;
+import citizensLoader.letters.PDFLetter;
+import citizensLoader.letters.PasswordGenerator;
+import citizensLoader.letters.TxtLetter;
 import persistence.User;
 
 public class ExcelReader {
 	
 	private LetterGenerator letterGenerator = new TxtLetter();
 	private LetterGenerator letterGenerator2 = new PDFLetter();
+	
+	public ExcelReader()
+	{
+		
+	}
 
 	public ArrayList<User> readFrom(String filename) throws IOException {
 
@@ -61,16 +66,16 @@ public class ExcelReader {
 		User us = null;
 		
 		if (row != null) {
-			String firstname = row.getCell(0).getStringCellValue();
-			String lastname = row.getCell(1).getStringCellValue();
+			String firstName = row.getCell(0).getStringCellValue();
+			String lastName = row.getCell(1).getStringCellValue();
 			String email = row.getCell(2).getStringCellValue();
-			Date dateofbirth = row.getCell(3).getDateCellValue();
+			Date dateOfBirth = row.getCell(3).getDateCellValue();
 			String address = row.getCell(4).getStringCellValue();
 			String nationality = row.getCell(5).getStringCellValue();
 			String dni = row.getCell(6).getStringCellValue();
-			int polling = (int) row.getCell(7).getNumericCellValue();
+			int pollingStation = (int) row.getCell(7).getNumericCellValue();
 
-			us = new User(firstname, lastname, dateofbirth, address, nationality, dni, email);
+			us = new User(dni, firstName, lastName, dateOfBirth, address, email, nationality, pollingStation);
 		
 		us.setPassword(PasswordGenerator.generateRandomPassword());
 		}
