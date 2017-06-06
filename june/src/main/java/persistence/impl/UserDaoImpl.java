@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import persistence.Database;
 import persistence.User;
@@ -21,6 +22,7 @@ public class UserDaoImpl implements UserDao{
 			+ "password, email, birthDate, address, nationality, pollingStation) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static String CHECK_IF_EXIST_USER = "SELECT * FROM PUBLIC.USERS WHERE DNI=?";
+	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.USERS WHERE EMAIL=?";
 	
 	
 	public UserDaoImpl()
@@ -33,18 +35,37 @@ public class UserDaoImpl implements UserDao{
 		PreparedStatement pst = null;
 		Connection con=null;
 		
-		if(existUser(user)) {
-			System.out.println("User already exists: " + user.toString());
+		if(existUser(user) || userWithDifferentData(user))
+		{
 			File log = new File("Logs/log.txt");
-			try {
-				
-				BufferedWriter bw = new BufferedWriter(new FileWriter(log));
-				bw.append("User already exists: " + user.getFirstName() + " " + user.getLastName() + " " + user.getDni() + "\n");
-				bw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			
+			if(existUser(user)) {
+				System.out.println("User already exists: " + user.toString());
+				try {
+					
+					BufferedWriter bw = new BufferedWriter(new FileWriter(log));
+					bw.append("User already exists: " + user.getFirstName() + " " + user.getLastName() 
+						+ " " + user.getDni() + "\n");
+					bw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return;
 			}
-			return;
+			
+			if(userWithDifferentData(user)){
+				System.out.println("User has different data: " + user.toString());
+				try {
+					
+					BufferedWriter bw = new BufferedWriter(new FileWriter(log));
+					bw.append("User already exists with different data: " + user.getFirstName() + " " + user.getLastName() 
+						+ " " + user.getDni() + "\n");
+					bw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
 		}
 		
 		try {
@@ -58,7 +79,7 @@ public class UserDaoImpl implements UserDao{
 			pst.setDate(6, new java.sql.Date(user.getDateOfBirth().getTime()));
 			pst.setString(7, user.getAddress());
 			pst.setString(8, user.getNationality());
-			pst.setInt(9, user.getPollingStation());
+			pst.setInt(9,  user.getPollingStation());
 
 			pst.executeUpdate();
 
@@ -92,5 +113,60 @@ public class UserDaoImpl implements UserDao{
 		return false;
 	}
 
+	@Override
+	public boolean userWithDifferentData(User givenUser) 
+	{
+		User searchedUser = getUserByEmail(givenUser.getEmail());
+		return !givenUser.equals(searchedUser);
+	}
 
+	@Override
+	public User getUserByEmail(String email) 
+	{
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		Connection con=null;
+		
+		try {
+			con = Database.getConnection();
+			pst = con.prepareStatement(USER_BY_EMAIL);
+			pst.setString(1, email);
+
+			rs = pst.executeQuery();
+			if (rs.next()) {
+
+				Integer id = rs.getInt("id");
+				String dni = rs.getString("dni");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				Date birthDate = rs.getDate("birthDate");
+				String nationality = rs.getString("nationality");
+				String address = rs.getString("address");
+				int pollingStation = rs.getInt("pollingStation");
+				String password = rs.getString("password");
+
+				User user = new User(dni, firstName, lastName, birthDate, address, email, nationality, pollingStation);
+				
+				user.setId(id);
+				user.setPassword(password);
+
+				return user;
+			}
+			return null;
+
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pst != null)
+					pst.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
 }

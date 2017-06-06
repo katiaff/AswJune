@@ -17,7 +17,7 @@ public class User {
 	private String email;
 	private String password;
 	
-	private int pollingStation;
+	private int pollingStation; 
 	
 	public User()
 	{
