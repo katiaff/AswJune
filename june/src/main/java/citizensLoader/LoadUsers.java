@@ -16,6 +16,7 @@ public class LoadUsers {
 		runner.run(args);
 	}
 
+	
 	private void run(String... args) {
 		System.out.println("#########\nCitizens Loader \n#########\n");
 		

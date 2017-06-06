@@ -27,6 +27,14 @@ public class ExcelReader {
 		
 	}
 
+	/**
+	 * Reads the users from the given filem saves them in the database and generates a 
+	 * txt and pdf letter with the credentials to access the system
+	 * 
+	 * @param filename
+	 * @return arrayList of users 
+	 * @throws IOException
+	 */
 	public ArrayList<User> readFrom(String filename) throws IOException {
 
 		ArrayList<User> users = new ArrayList<User>();
@@ -58,8 +66,9 @@ public class ExcelReader {
 	}
 
 	/**
-	 * generates a new Person from the excel data file
-	 * @param row excel row from which the person data is obtained
+	 * generates a new User from the excel data file
+	 * 
+	 * @param excel row from which the person data is obtained
 	 * @return new user
 	 */
 	private User userFromRow(Row row) {

@@ -13,7 +13,7 @@ import persistence.User;
 public class PDFLetter implements LetterGenerator{
 
 	/**
-	 * Writes a pdf letter for each User user
+	 * Writes a pdf letter for each user with the credentials to access the system
 	 */
 	public void generateLetter(User user) throws IOException {
         PdfWriter writer = new PdfWriter("PersonalLetters/"+user.getEmail()+".pdf");

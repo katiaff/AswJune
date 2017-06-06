@@ -8,6 +8,9 @@ import persistence.User;
 
 public class TxtLetter implements LetterGenerator{
 	
+	/**
+	 * Writes a txt letter for each user with the credentials to access the system
+	 */
 	public void generateLetter(User user) throws IOException {
 		BufferedWriter file;
 
