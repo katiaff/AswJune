@@ -18,11 +18,11 @@ import persistence.UserDao;
 public class UserDaoImpl implements UserDao{
 	
 	//Queries
-	private static String SAVE_USER = "INSERT INTO PUBLIC.USERS (dni, firstName, lastName, "
+	private static String SAVE_USER = "INSERT INTO USER (dni, firstName, lastName, "
 			+ "password, email, birthDate, address, nationality, pollingStation) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static String CHECK_IF_EXIST_USER = "SELECT * FROM PUBLIC.USERS WHERE DNI=?";
-	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.USERS WHERE EMAIL=?";
+	private static String CHECK_IF_EXIST_USER = "SELECT * FROM USER WHERE DNI=?";
+	private static String USER_BY_EMAIL = "SELECT * FROM USER WHERE EMAIL=?";
 	
 	
 	public UserDaoImpl()

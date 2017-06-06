@@ -1,14 +1,13 @@
 package persistence;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Database {
 
 	public static Connection getConnection() {
+		
 		try {
-			Connection db = DriverManager.getConnection("jdbc:postgresql:citizens", "postgres", "postgres");
+			Connection db = DriverManager.getConnection("jdbc:postgresql:aswJune", "postgres", "postgresql");
 			return db;
 		} catch (SQLException e) {
 			System.err.println("Connection to the database refused: ");
