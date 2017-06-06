@@ -2,4 +2,4 @@
 
 
 Author:
-**Katia Fernández (@katiaff)
+- Katia Fernández Fernández (@katiaff)
