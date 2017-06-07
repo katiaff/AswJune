@@ -1,0 +1,12 @@
+INSERT INTO public."user"(
+	dni, firstname, lastname, password, email, birthdate, address, nationality)
+	VALUES ('71900607P', 'katia', 'fernandez', '01234', 'katia@uniovi.es', '1995-06-27', 'PiedrasBlancas', 'España');
+INSERT INTO public."user"(
+     dni, firstname, lastname, password, email, birthdate, address, nationality)
+     VALUES ('12345678W', 'maria', 'gonzalez', '01234', 'maria@uniovi.es', '2005-07-20', 'Oviedo', 'España');
+INSERT INTO public."user"(
+      dni, firstname, lastname, password, email, birthdate, address, nationality)
+      VALUES ('98765432T', 'pablo', 'perez', '01234', 'pablo@uniovi.es', '1985-09-24', 'Gijon', 'España');
+INSERT INTO public."user"(
+      dni, firstname, lastname, password, email, birthdate, address, nationality)
+      VALUES ('11223344R', 'luis', 'rodriguez', '01234', 'luis@uniovi.es', '1991-06-18', 'Oviedo', 'España');

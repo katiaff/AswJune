@@ -18,7 +18,7 @@ import persistence.UserDao;
 public class UserDaoImpl implements UserDao{
 	
 	//Queries
-	private static String SAVE_USER = "INSERT INTO PUBLIC.User(dni, firstName, lastName, password, email, birthdate, address, nationality, pollingStation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static String SAVE_USER = "INSERT INTO PUBLIC.User(dni, firstName, lastName, password, email, birthdate, address, nationality) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static String CHECK_IF_EXIST_USER = "SELECT * FROM USER WHERE DNI=?";
 	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.user WHERE EMAIL= ?";
 	
@@ -72,7 +72,6 @@ public class UserDaoImpl implements UserDao{
 			pst.setDate(6, new java.sql.Date(user.getDateOfBirth().getTime()));
 			pst.setString(7, user.getAddress());
 			pst.setString(8, user.getNationality());
-			pst.setInt(9, user.getPollingStation());
 
 			pst.executeUpdate();
 
@@ -134,10 +133,9 @@ public class UserDaoImpl implements UserDao{
 				Date birth = rs.getDate("birthDate");
 				String nationality = rs.getString("nationality");
 				String address = rs.getString("address");
-				int polling = rs.getInt("pollingStation");
 				String pass = rs.getString("password");
 
-				User user = new User(dni, name, surname, birth, address, email, nationality, polling);
+				User user = new User(dni, name, surname, birth, address, email, nationality);
 				user.setId(idBase);
 				user.setPassword(pass);
 

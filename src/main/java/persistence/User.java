@@ -17,7 +17,6 @@ public class User {
 	private String email;
 	private String password;
 	
-	private int pollingStation; 
 	
 	public User()
 	{
@@ -25,7 +24,7 @@ public class User {
 	}
 
 	public User(String dni, String firstName, String lastName, String password, String email,
-			Date dateOfBirth, String address, String nationality, int pollingStation) {
+			Date dateOfBirth, String address, String nationality) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -35,11 +34,10 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.nationality = nationality;
-		this.pollingStation = pollingStation;
 	}
 
 	public User(String dni, String firstName, String lastName, Date dateOfBirth, String address, String email,
-			String nationality, int pollingStation) {
+			String nationality) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -48,7 +46,6 @@ public class User {
 		this.address = address;
 		this.email = email;
 		this.nationality = nationality;
-		this.pollingStation = pollingStation;
 	}
 
 	public Integer getId() {
@@ -123,14 +120,6 @@ public class User {
 		this.password = password;
 	}
 
-	public int getPollingStation() {
-		return pollingStation;
-	}
-
-	public void setPollingStation(int pollingStation) {
-		this.pollingStation = pollingStation;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,7 +132,6 @@ public class User {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + pollingStation;
 		return result;
 	}
 
@@ -196,8 +184,6 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (pollingStation != other.pollingStation)
-			return false;
 		return true;
 	}
 
@@ -205,6 +191,6 @@ public class User {
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", address="
 				+ address + ", nationality=" + nationality + ", dni=" + dni + ", email=" + email + ", password="
-				+ password + ", pollingStation=" + pollingStation + "]";
+				+ password + "]";
 	}
 }

@@ -89,9 +89,8 @@ public class ExcelReader {
 			String address = row.getCell(4).getStringCellValue();
 			String nationality = row.getCell(5).getStringCellValue();
 			String dni = row.getCell(6).getStringCellValue();
-			int pollingStation = (int) row.getCell(7).getNumericCellValue();
 
-			us = new User(dni, firstName, lastName, dateOfBirth, address, email, nationality, pollingStation);
+			us = new User(dni, firstName, lastName, dateOfBirth, address, email, nationality);
 		
 		us.setPassword(PasswordGenerator.generateRandomPassword());
 		}

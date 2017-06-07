@@ -1,0 +1,12 @@
+INSERT INTO public.comment(
+	id, comment, numberofvotes, commentdate, iduser, idproposal)
+	VALUES (1, 'bien', 5, '2017-06-05', 1, 1);
+INSERT INTO public.comment(
+	id, comment, numberofvotes, commentdate, iduser, idproposal)
+	VALUES (2, 'regular', 2, '2017-05-28', 1, 2);
+INSERT INTO public.comment(
+	id, comment, numberofvotes, commentdate, iduser, idproposal)
+	VALUES (3,'es mejor', 3, '2017-05-30', 3, 3);
+INSERT INTO public.comment(
+	id, comment, numberofvotes, commentdate, iduser, idproposal)
+	VALUES (4, 'vale', 7, '2017-06-07', 4, 4);

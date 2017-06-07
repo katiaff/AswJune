@@ -1,0 +1,181 @@
+-- Sequence: public.user_id_rel
+
+-- DROP SEQUENCE public.user_id_rel;
+
+CREATE SEQUENCE public.user_id_rel
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+ALTER TABLE public.user_id_rel
+  OWNER TO postgres;
+
+
+-- Table: public."user"
+
+-- DROP TABLE public."user";
+
+CREATE TABLE public.user
+(
+  id integer NOT NULL DEFAULT nextval('user_id_rel'::regclass),
+  dni text NOT NULL,
+  firstName text,
+  lastName text,
+  password text,
+  email text,
+  birthDate date,
+  address text,
+  nationality text,
+  pollingStation integer,
+  CONSTRAINT users_pkey PRIMARY KEY (dni),
+  CONSTRAINT user_id_key UNIQUE (id)
+);
+
+ALTER TABLE public.user
+  OWNER TO postgres;
+
+-- Sequence: public.category_id_rel
+
+-- DROP SEQUENCE public.category_id_rel;
+
+CREATE SEQUENCE public.category_id_rel
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+ALTER TABLE public.category_id_rel
+  OWNER TO postgres;
+
+-- Table: public.category
+
+-- DROP TABLE public.category;
+
+CREATE TABLE public.category
+(
+  id integer NOT NULL DEFAULT nextval('category_id_rel'::regclass),
+  categoryName text,
+  CONSTRAINT category_pkey PRIMARY KEY (id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE public.category
+  OWNER TO postgres;
+
+
+-- Sequence: public.proposal_id_rel
+
+-- DROP SEQUENCE public.proposal_id_rel;
+
+CREATE SEQUENCE public.proposal_id_rel
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+ALTER TABLE public.proposal_id_rel
+  OWNER TO postgres;
+
+
+-- Table: public.proposal
+
+-- DROP TABLE public.proposal;
+
+CREATE TABLE public.proposal
+(
+  id integer NOT NULL DEFAULT nextval('proposal_id_rel'::regclass),
+  proposalContent text,
+  numberOfVotes integer,
+  idUser integer,
+  idCategory integer,
+  CONSTRAINT proposal_pkey PRIMARY KEY (id),
+  CONSTRAINT "foreignKey_Category" FOREIGN KEY (idCategory)
+  REFERENCES public.category (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT proposal_user_id_fkey FOREIGN KEY (idUser)
+  REFERENCES public."user" (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE public.proposal
+  OWNER TO postgres;
+
+-- Index: public."fki_foreignKey_Category"
+
+-- DROP INDEX public."fki_foreignKey_Category";
+
+CREATE INDEX "fki_foreignKey_Category"
+  ON public.proposal
+  USING btree
+  (idCategory);
+
+
+
+-- Sequence: public.comment_id_rel
+
+-- DROP SEQUENCE public.comment_id_rel;
+
+CREATE SEQUENCE public.comment_id_rel
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+ALTER TABLE public.comment_id_rel
+  OWNER TO postgres;
+
+CREATE TABLE public.comment
+(
+  id integer NOT NULL DEFAULT nextval('comment_id_rel'::regclass),
+  comment text,
+  numberOfVotes integer,
+  commentDate date,
+  idUser integer,
+  idProposal integer,
+  CONSTRAINT commentary_pkey PRIMARY KEY (id),
+  CONSTRAINT commentary_proposal_id_fkey FOREIGN KEY (idProposal)
+  REFERENCES public.proposal (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT commentary_user_id_fkey FOREIGN KEY (idUser)
+  REFERENCES public."user" (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE public.comment
+  OWNER TO postgres;
+
+
+-- Table: public.word
+
+-- DROP TABLE public.word;
+
+-- Sequence: public.word_id_rel
+
+-- DROP SEQUENCE public.word_id_rel;
+
+CREATE SEQUENCE public.word_id_rel
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 4
+CACHE 1;
+ALTER TABLE public.word_id_rel
+  OWNER TO postgres;
+
+CREATE TABLE public.word
+(
+  word text,
+  id integer NOT NULL DEFAULT nextval('word_id_rel'::regclass),
+  CONSTRAINT word_pkey PRIMARY KEY (id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE public.word
+  OWNER TO postgres;

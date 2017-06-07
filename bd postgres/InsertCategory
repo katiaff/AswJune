@@ -1,0 +1,12 @@
+INSERT INTO public.category(
+	id, categoryname)
+	VALUES (1, 'music');
+INSERT INTO public.category(
+	id, categoryname)
+	VALUES (2, 'sport');
+INSERT INTO public.category(
+	id, categoryname)
+	VALUES (3, 'university');
+INSERT INTO public.category(
+	id, categoryname)
+	VALUES (4, 'news');

@@ -21,13 +21,13 @@ public class UserTest {
 		
 		Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse("27/06/1995");
 		
-		User newUser = new User("71900607P", "Katia", "fernandez", birthdate, "Aviles", 
-				"katia@uniovi.es", "Español", 1);
+		User newUser = new User("prueba", "nuevo", "usuario", birthdate, "oviedo", 
+				"nuevousuario@uniovi.es", "España");
 		newUser.setPassword("01234");
 		
 		userdao.saveUser(newUser);
 		
-		User lookForNewUser = userdao.getUserByEmail("katia@uniovi.es");
+		User lookForNewUser = userdao.getUserByEmail("nuevousuario@uniovi.es");
 		
 		assertEquals(newUser, lookForNewUser);
 	}
@@ -44,3 +44,6 @@ public class UserTest {
 		assertEquals(dniFound, dniUser);
 	}
 }
+
+
+

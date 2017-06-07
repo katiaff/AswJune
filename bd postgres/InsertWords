@@ -1,0 +1,15 @@
+INSERT INTO public.word(
+	word, id)
+	VALUES ('hola', 1);
+INSERT INTO public.word(
+	word, id)
+	VALUES ('espacio', 2);
+INSERT INTO public.word(
+	word, id)
+	VALUES ('adios', 3);
+INSERT INTO public.word(
+	word, id)
+	VALUES ('publico', 4);
+INSERT INTO public.word(
+	word, id)
+	VALUES ('privado', 5);
