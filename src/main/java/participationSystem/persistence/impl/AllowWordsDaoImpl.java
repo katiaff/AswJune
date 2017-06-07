@@ -13,8 +13,8 @@ import persistence.Database;
 public class AllowWordsDaoImpl implements AllowWordsDao{
 	
 	//Queries
-	private String ADD_WORDS = "INSERT INTO PUBLIC.WORD (WORD) VALUES (?)";
-	private String FIND_ALL_WORDS = "SELECT * FROM PUBLIC.WORDS";
+	private String ADD_WORDS = "INSERT INTO PUBLIC.WORD (word) VALUES (?)";
+	private String FIND_ALL_WORDS = "SELECT * FROM PUBLIC.WORD";
 
 	@Override
 	public void add(List<String> words) {

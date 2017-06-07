@@ -14,9 +14,9 @@ import persistence.Database;
 public class CategoryDaoImpl implements CategoryDao{
 	
 	//Queries
-	private String ADD_CATEGORY = "INSERT INTO categories (NAME) VALUES (?)";
-	private String FIND_CATEGORY_BY_ID = "SELECT * FROM categories WHERE ID=?";
-	private static String ALL_CATEGORIES = "SELECT * FROM categories";
+	private String ADD_CATEGORY = "INSERT INTO category (categoryName) VALUES (?)";
+	private String FIND_CATEGORY_BY_ID = "SELECT * FROM category WHERE id=?";
+	private static String ALL_CATEGORIES = "SELECT * FROM category";
 
 
 	@Override

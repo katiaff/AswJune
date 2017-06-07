@@ -19,8 +19,8 @@ public class UserDaoImpl implements UserDao{
 	
 	//Queries
 	private static String SAVE_USER = "INSERT INTO PUBLIC.User(dni, firstName, lastName, password, email, birthdate, address, nationality) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	private static String CHECK_IF_EXIST_USER = "SELECT * FROM USER WHERE DNI=?";
-	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.user WHERE EMAIL= ?";
+	private static String CHECK_IF_EXIST_USER = "SELECT * FROM user WHERE dni=?";
+	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.user WHERE email= ?";
 	
 
 	public void saveUser(User user) {

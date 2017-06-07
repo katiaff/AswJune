@@ -16,12 +16,12 @@ import persistence.Persistence;
 public class CommentDaoImpl implements CommentDao{
 	
 	//Queries
-	private static String ADD_COMMENT = "INSERT INTO comments (content, votes, date, user_id, proposal_id) VALUES (?, ?, ?, ?, ?)";
-	private static String SEARCH_COMMENT_BY_ID = "SELECT * FROM comments WHERE ID=?";
-	private static String ALL_COMMENTS_PROPOSAL = "SELECT * FROM comments WHERE PROPOSAL_ID=?";
-	private static String CHRONOLOGICAL_ORDER = "SELECT * FROM comments WHERE PROPOSAL_ID=? ORDER BY date DESC";
-	private static String POPULARITY_ORDER = "SELECT * FROM comments WHERE PROPOSAL_ID=? ORDER BY VOTES DESC";
-	private static String UPDATE_COMMENT = "UPDATE comments SET CONTENT = ?, " + "VOTES = ?, date = ? WHERE ID = ?";
+	private static String ADD_COMMENT = "INSERT INTO comment (comment, numberOfVotes, commentDate, idUser, idProposal) VALUES (?, ?, ?, ?, ?)";
+	private static String SEARCH_COMMENT_BY_ID = "SELECT * FROM comment WHERE id=?";
+	private static String ALL_COMMENTS_PROPOSAL = "SELECT * FROM comment WHERE idProposal=?";
+	private static String CHRONOLOGICAL_ORDER = "SELECT * FROM comment WHERE idProposal=? ORDER BY commentDate DESC";
+	private static String POPULARITY_ORDER = "SELECT * FROM comment WHERE idProposal=? ORDER BY numberOfVotes DESC";
+	private static String UPDATE_COMMENT = "UPDATE comment SET comment = ?, " + "numberOfVotes = ?, commentDate = ? WHERE id = ?";
 
 	@Override
 	public void addComment(Comment comment) throws Exception {

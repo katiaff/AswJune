@@ -15,12 +15,12 @@ import persistence.Persistence;
 public class ProposalDaoImpl implements ProposalDao{
 	
 	//Queries
-	private static String ADD_PROPOSAL = "INSERT INTO proposals(content, votes, user_id, category_id) VALUES (?,?,?, ?)";
-	private static String DELETE_COMMENTS_TO_DELETE_PROPOSAL =  "DELETE FROM comments WHERE PROPOSAL_ID=?";
-	private static String DELETE_PROPOSAL =  "DELETE FROM proposals WHERE ID=?";
-	private static String UPDATE_PROPOSAL = "UPDATE proposals SET CONTENT = ?, VOTES = ?, CATEGORY_ID = ?" + "WHERE ID = ?";
-	private static String ALL_PROPOSALS = "SELECT * FROM proposals";
-	private static String PROPOSAL_BY_ID = "SELECT * FROM proposals WHERE ID=?";
+	private static String ADD_PROPOSAL = "INSERT INTO proposal(proposalContent, numberOfVotes, idUser, idCategory) VALUES (?,?,?,?)";
+	private static String DELETE_COMMENTS_TO_DELETE_PROPOSAL =  "DELETE FROM comment WHERE idProposal=?";
+	private static String DELETE_PROPOSAL =  "DELETE FROM proposal WHERE id=?";
+	private static String UPDATE_PROPOSAL = "UPDATE proposal SET proposalContent = ?, numberOfVotes = ?, idCategory = ? WHERE id= ?";
+	private static String ALL_PROPOSALS = "SELECT * FROM proposal";
+	private static String PROPOSAL_BY_ID = "SELECT * FROM proposal WHERE id=?";
 
 	@Override
 	public void addProposal(Proposal proposal) throws Exception {
