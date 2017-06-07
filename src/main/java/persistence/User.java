@@ -38,16 +38,16 @@ public class User {
 		this.pollingStation = pollingStation;
 	}
 
-	public User(String dni, String firstName, String lastName, Date dateOfBirth, String address, String nationality,
-			String email, int pollingStation) {
+	public User(String dni, String firstName, String lastName, Date dateOfBirth, String address, String email,
+			String nationality, int pollingStation) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.nationality = nationality;
 		this.email = email;
+		this.nationality = nationality;
 		this.pollingStation = pollingStation;
 	}
 

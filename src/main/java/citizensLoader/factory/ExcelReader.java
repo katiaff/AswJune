@@ -3,9 +3,9 @@ package citizensLoader.factory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -34,26 +34,29 @@ public class ExcelReader {
 	 * @param filename
 	 * @return arrayList of users 
 	 * @throws IOException
+	 * @throws ParseException 
 	 */
-	public ArrayList<User> readFrom(String filename) throws IOException {
+	public ArrayList<User> readFrom(String filename) throws IOException, ParseException {
 
 		ArrayList<User> users = new ArrayList<User>();
 
 		FileInputStream file;
+		int rows;
 
 		file = new FileInputStream(new File(filename));
 		
 		 XSSFWorkbook hwb = new XSSFWorkbook(file);
 		 XSSFSheet sheet = hwb.getSheetAt(0);
-		 Iterator<Row> rowIterator = sheet.iterator();
 		 
-		 while(rowIterator.hasNext()) {
-			 Row row = rowIterator.next();
+		 rows = sheet.getPhysicalNumberOfRows();
+		 
+		 for(int i= 1; i<rows; i++){
+			 Row row = sheet.getRow(i);
 			 User us = userFromRow(row);
 			 if(us != null)
-				 users.add(us);				 
+				 users.add(us);	
 		 }
-		 
+	 
 		 for(User user : users){
 			 letterGenerator.generateLetter(user);
 			 letterGenerator2.generateLetter(user);
@@ -71,14 +74,18 @@ public class ExcelReader {
 	 * @param excel row from which the person data is obtained
 	 * @return new user
 	 */
-	private User userFromRow(Row row) {
+	private User userFromRow(Row row){
+
+		
 		User us = null;
 		
 		if (row != null) {
 			String firstName = row.getCell(0).getStringCellValue();
 			String lastName = row.getCell(1).getStringCellValue();
 			String email = row.getCell(2).getStringCellValue();
-			Date dateOfBirth = row.getCell(3).getDateCellValue();
+
+			Date dateOfBirth =  row.getCell(3).getDateCellValue();
+	
 			String address = row.getCell(4).getStringCellValue();
 			String nationality = row.getCell(5).getStringCellValue();
 			String dni = row.getCell(6).getStringCellValue();

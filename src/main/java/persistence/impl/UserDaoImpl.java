@@ -18,17 +18,10 @@ import persistence.UserDao;
 public class UserDaoImpl implements UserDao{
 	
 	//Queries
-	private static String SAVE_USER = "INSERT INTO USER (dni, firstName, lastName, "
-			+ "password, email, birthDate, address, nationality, pollingStation) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static String SAVE_USER = "INSERT INTO PUBLIC.User(dni, firstName, lastName, password, email, birthdate, address, nationality, pollingStation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static String CHECK_IF_EXIST_USER = "SELECT * FROM USER WHERE DNI=?";
-	private static String USER_BY_EMAIL = "SELECT * FROM USER WHERE EMAIL=?";
+	private static String USER_BY_EMAIL = "SELECT * FROM PUBLIC.user WHERE EMAIL= ?";
 	
-	
-	public UserDaoImpl()
-	{
-		
-	}
 
 	public void saveUser(User user) {
 		
@@ -67,7 +60,7 @@ public class UserDaoImpl implements UserDao{
 				return;
 			}
 		}
-		
+
 		try {
 			con = Database.getConnection();
 			pst = con.prepareStatement(SAVE_USER);
@@ -79,7 +72,7 @@ public class UserDaoImpl implements UserDao{
 			pst.setDate(6, new java.sql.Date(user.getDateOfBirth().getTime()));
 			pst.setString(7, user.getAddress());
 			pst.setString(8, user.getNationality());
-			pst.setInt(9,  user.getPollingStation());
+			pst.setInt(9, user.getPollingStation());
 
 			pst.executeUpdate();
 
@@ -117,15 +110,14 @@ public class UserDaoImpl implements UserDao{
 	public boolean userWithDifferentData(User givenUser) 
 	{
 		User searchedUser = getUserByEmail(givenUser.getEmail());
-		return !givenUser.equals(searchedUser);
+		return givenUser.equals(searchedUser);
 	}
 
 	@Override
-	public User getUserByEmail(String email) 
-	{
+	public User getUserByEmail(String email) {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		Connection con=null;
+		Connection con =null;
 		
 		try {
 			con = Database.getConnection();
@@ -135,20 +127,19 @@ public class UserDaoImpl implements UserDao{
 			rs = pst.executeQuery();
 			if (rs.next()) {
 
-				Integer id = rs.getInt("id");
+				Integer idBase = rs.getInt("id");
 				String dni = rs.getString("dni");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				Date birthDate = rs.getDate("birthDate");
+				String name = rs.getString("firstName");
+				String surname = rs.getString("lastName");
+				Date birth = rs.getDate("birthDate");
 				String nationality = rs.getString("nationality");
 				String address = rs.getString("address");
-				int pollingStation = rs.getInt("pollingStation");
-				String password = rs.getString("password");
+				int polling = rs.getInt("pollingStation");
+				String pass = rs.getString("password");
 
-				User user = new User(dni, firstName, lastName, birthDate, address, email, nationality, pollingStation);
-				
-				user.setId(id);
-				user.setPassword(password);
+				User user = new User(dni, name, surname, birth, address, email, nationality, polling);
+				user.setId(idBase);
+				user.setPassword(pass);
 
 				return user;
 			}
